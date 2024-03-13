@@ -1,0 +1,230 @@
+@model PostDetailViewModel
+@{var filename = Model.post.image;
+string tarih = Model.post.Published.ToString("dd.MM.yyyy HH:mm");
+var currentUserId=User.FindFirstValue(ClaimTypes.NameIdentifier);
+var userReaction = @Model.userReaction;
+}
+<div class="container profile-container">
+  <div class="card-columns">
+
+    <div class="card">
+      <a href="">
+        @if(Model.post.image !=null){
+
+          <img class="card-img-top" src="/img/@filename">
+        }
+        <div class="card-body">
+          <a asp-action="Profile" asp-controller="Users" asp-route-id="@Model.user.Id">
+
+            <h5 class="card-title" id="userIdTitle">@Model.user.UserName</h5>
+            <hr>
+            <hr>
+          </a>
+          <p class="card-text">
+            @Model.post.Context
+          </p>
+          <p class="card-text"><small class="text-muted">@tarih
+        </div>
+      </a>
+      @if(User.Identity.IsAuthenticated){
+        if(userReaction!=null){
+          <div class="d-flex justify-content-center reactions">
+          <button type="submit" class="btn btn-sm text-success" id="removeReaction">
+            <p class="font-monospace ">@userReaction.reaction</p>
+          </button>
+          </div>
+        }
+        else{
+          <div class="d-flex justify-content-center reactions">
+            <button type="submit" id="likeBtn" class="btn"><p class="font-monospace">Like <br>@ViewBag.likeCount </p></button>
+            <button type="submit" id="unlikeBtn" class="btn"><p class="font-monospace"> Unlike <br>@ViewBag.unlikeCount</p></button>
+            <button type="submit" id="angryBtn" class="btn"><p class="font-monospace"> Angry <br> @ViewBag.angryCount </p></button>
+            <button type="submit" id="congrBtn" class="btn"><p class="font-monospace">Congr <br>@ViewBag.congrCount </p></button>
+          </div>
+        }       
+      }
+
+      <button type="button" class="btn  btn-outline-dark mb-2 " style="width: 100%;" id="addComment" data-post-id="@Model.postId">yorumları görüntüle</button>
+      <!--Yorum-->
+
+      <div class="mt-3 mb-3 postComments" style="display: none;" data-post-id="@Model.postId">
+        @foreach(var comm in Model.comments){
+        if(comm.postId==Model.post.PostId){
+
+        <div class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="justify-content-start">
+              <h6 class="me-2"><a href="/users/profile/@comm.user.Id"> @comm.user.UserName</a></h6>
+            </div>
+            <div class="d-flex justify-content-end m-2">
+              <form asp-action="RemoveComment" asp-controller="Posts" method="post" onsubmit="return confirm('Emin Misiniz')" style="display: inline-block;">
+                <input type="hidden" name="id" value="@comm.CommentId">
+                @if(@currentUserId == comm.userId){
+                  <button type="submit" class="btn btn-outline-dark btn-sm">Yorumu Sil</button>
+                }
+              </form>
+            </div>
+          </div>
+          <p>@comm.Text</p>
+        </div>
+        }
+        }
+
+        @if(User.Identity.IsAuthenticated){
+         
+          <div class="addCommentForm">
+            <form asp-action="AddComment" asp-controller="Posts" method="post" enctype="multipart/form-data">
+              <textarea class="form-control" asp-for="text"></textarea>
+              <input type="hidden" asp-for="userId" value="@currentUserId">
+              <input type="hidden" asp-for="postId" value="@Model.postId">
+              <button type="submit" class="btn btn-dark AddComment btn-sm mt-2" style="width: 100%;">Yorum ekle</button>
+            </form>
+          </div>
+        }else{
+          <p class="text-danger">yorum yapabilmek için giriş yapmalısınız</p>
+        }
+      </div>
+    
+     
+
+    </div>
+
+  </div>
+  @{
+    if(Model.user.UserName == User.FindFirstValue(ClaimTypes.Name)){
+    <a class="btn btn-outline-dark btn-sm mt-4" style="width: 100%;" asp-action="Edit" asp-route-id="@Model.post.PostId">Edit Post
+    </a>
+    }
+
+
+}
+
+</div>
+
+</div>
+@section Scripts{
+<script>
+  $(document).ready(function () {
+    $('#addComment').click(function () {
+      $(".postComments").show(500);
+      $('#addComment').hide();
+    })
+    $(".AddComment").click(function () {
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("AddComment")',
+        dataType: 'json',
+        data: {
+          postId: $('#postId').val(),
+          userId: $('#userId').val(),
+          text: $('#text').val()
+        },
+        success: function (yorum) {
+          if(yorum.text ==null || yorum.userId==null || yorum.postId==null)
+            return false;
+          console.log(yorum);
+          $(".postComments").append(`<div class="my-4"> 
+            <div class="mb-2 d-flex"> 
+              <h6 class="me-2">${yorum.userName}</h6> 
+              </div>
+              </div> 
+              <p>${yorum.text} </p> 
+              </div> `);
+        }
+      });
+      return false;
+    });
+    $("#likeBtn").click(function(){
+      $.ajax({
+        type:'POST',
+        url: '@Url.Action("AddReaction")',
+        data:{
+          userId: "@currentUserId",
+          postId: "@Model.postId",
+          reactionId: 0
+        },
+        success: function(response) {
+        console.log(response);
+        location.reload()
+     
+        }
+     
+      })
+      return false;
+    });
+    
+    $("#unlikeBtn").click(function(){
+      $.ajax({
+        type:'POST',
+        url: '@Url.Action("AddReaction")',
+        data:{
+          userId: "@currentUserId",
+          postId: "@Model.postId",
+          reactionId: 1
+        },
+        success: function(response) {
+        console.log(response);
+        location.reload()
+     
+        }
+     
+      })
+      return false;
+    });
+
+    $("#angryBtn").click(function(){
+      $.ajax({
+        type:'POST',
+        url: '@Url.Action("AddReaction")',
+        data:{
+          userId: "@currentUserId",
+          postId: "@Model.postId",
+          reactionId: 2
+        },
+        success: function(response) {
+        console.log(response);
+        location.reload()
+     
+        }
+     
+      })
+      
+      return false;
+    });
+
+    $("#congrBtn").click(function(){
+      $.ajax({
+        type:'POST',
+        url: '@Url.Action("AddReaction")',
+        data:{
+          userId: "@currentUserId",
+          postId: "@Model.postId",
+          reactionId: 3
+        },   
+        success: function(response) {
+        console.log(response);
+        location.reload()
+     
+        }
+     
+      })
+      return false;
+    });
+    $("#removeReaction").click(function(){
+      $.ajax({
+        type:'POST',
+        url: '@Url.Action("RemoveReaction")',
+        data:{
+          UserId: "@currentUserId",
+          postId: "@Model.postId",
+        },
+        success: function(response) {
+          console.log(response);
+          location.reload()
+        }
+      });
+      return false;
+    });
+  });
+</script>
+}

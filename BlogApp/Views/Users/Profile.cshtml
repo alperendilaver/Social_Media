@@ -1,0 +1,27 @@
+@model ProfileViewModel
+
+<div class="container"style="width: 20rem;>
+  <div class="container profile-container >
+    <div class="card-columns">
+      @foreach(var item in Model.posts){
+      var filename=item.image;
+      <div class="card mt-5">
+        <a asp-action="Detail" asp-controller="Posts" asp-route-id="@item.PostId">
+          @if(item.image!=null){
+
+          <img class="card-img-top " src="/img/@filename" alt="Card image cap">
+          }
+
+          <div class="card-body">
+            <p class="card-text">
+              @item.Context
+            </p>
+            <p class="card-text"><small class="text-muted">@item.Published.ToString("dd.MM.yyyy HH:mm")</small>
+          </div>
+        </a>
+      </div>
+      }
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+@model List<GroupMemberShipRequests>
+
+
+<div class="d-flex flex-column">
+    @foreach(var item in Model){
+        @if(item.stat == status.waiting){
+            <div class="card-columns d-flex justify-content-center">
+                <div class="card mt-5" style="width: 600px;">
+                    <a href="/Users/Profile/@item.user.UserName">
+                        <h6>@item.user.UserName</h6>
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <form asp-action="AcceptRequest" asp-controller="GroupMemberShipRequest" method="post">
+                                    <input type="hidden" name="reqId" value="@item.requestId">
+                                    <input type="hidden" name="grpId" value="@item.GroupId">
+                                    <button type="submit" class="btn btn-outline-dark">Üyelik İsteğini Onayla</button>
+                                </form>        
+                            </div>
+                            <div class="justify-content-end">
+                                <form asp-action="RejectRequest" asp-controller="GroupMemberShipRequest" method="post">
+                                    <input type="hidden" name="reqId" value="@item.requestId">
+                                    <button  class="btn btn-outline-dark ">Üyelik İsteğini Reddet</button>
+                                </form>
+                            </div>
+                        </div>
+                    
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+        }
+    }
+</div>

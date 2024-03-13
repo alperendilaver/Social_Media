@@ -1,0 +1,93 @@
+@model GroupDetailViewModel
+
+<div>
+
+  <div class="d-flex bd-highlight">
+    <div class="p-2 flex-grow-1 bd-highlight">
+      <h5 class="fs-1">@Model.group.GroupName</h5>
+      <p class="fw-light">Grup Üyesi Sayısı @Model.group.GroupUsers.Count().ToString()</p>
+    </div>
+    <div class="p-2 bd-highlight">
+      
+  <form asp-action="CreatePost" asp-controller="Posts" method="get">
+
+    <input type="hidden" name="id" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
+    <input type="hidden" name="isGrupPost" value="true">
+    
+    <input type="hidden" name="grpId" value="@Model.group.GroupId">
+    <button class="btn btn-dark" type="submit">Grupta Post Paylaş 
+    </button>
+  
+  </form>
+    </div>
+    <div class="p-2 bd-highlight">
+      @if(Model.isCurrUserA_Admin){
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle bg-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin İşlemleri
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+            <li>
+              <a asp-action="AddMember" asp-route-id="@Model.group.GroupId" class="dropdown-item">Gruba Üye Ekle</a>
+            </li>
+            <li>
+              <a asp-action="Members" asp-route-id="@Model.group.GroupId" class="dropdown-item">Grup Üyelerini Görüntüle</a>
+            </li>
+            <li>
+              <a asp-action="Requests" asp-route-id="@Model.group.GroupId" class="dropdown-item">Grup İsteklerini Görüntüle</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <form asp-action="Delete" method="post" onsubmit="return confirm('Emin Misiniz')" style="display: inline-block;" >
+                <input type="hidden"  name="groupId" value="@Model.group.GroupId">
+                <button type="submit" class="dropdown-item">Grubu Sil</button>
+              </form>
+          </li>
+          </ul>
+        </div>
+      }
+      
+    </div>
+  </div>
+
+
+  
+  
+
+</div>
+    <div id="GroupPosts">
+
+
+      <div class="container" style="width: 20rem;">
+        <div class="container profile-container">
+          <div class="card-columns">
+            @foreach(var item in Model.posts){
+            if(item.GroupId==Model.group.GroupId){
+
+            var filename=item.image;
+            <div class="card mt-5">
+              <a asp-action="Detail" asp-controller="Posts" asp-route-id="@item.PostId">
+                <h6>@item.user.UserName</h6>
+                @if(item.image!=null){
+
+                <img class="card-img-top " src="/img/@filename" alt="Card image cap">
+                }
+
+                <div class="card-body">
+                  <p class="card-text">
+                    @item.Context
+                  </p>
+                  <p class="card-text"><small class="text-muted">@item.Published.ToString("dd.MM.yyyy HH:mm")</small>
+                </div>
+              </a>
+              @if(Model.isCurrUserA_Admin){
+                <form asp-action="Delete" asp-controller="Posts" method="post" onsubmit="return confirm('Emin Misiniz')" style="display: inline-block;">
+                <input type="hidden" asp-for="postId" value="@item.PostId">
+                <input type="hidden" asp-for="GroupId" value="@item.GroupId">
+                <button type="submit" class="btn btn-outline-danger" style="width: 100%;">Postu Gruptan Kaldır</button>
+                </form>
+              }
+            </div>}}
+          </div>
+
+        </div>

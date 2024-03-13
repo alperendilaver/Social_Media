@@ -1,0 +1,27 @@
+
+  h1 {
+    color: #fff;
+    padding: 10px 0;
+  }
+  .profile-container{
+    width:25rem !important;
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border: none;
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+    }
+    a {
+      text-decoration: none;
+      color: initial;
+      &:hover {
+        text-decoration: initial;
+      }
+    }
+    .text-muted i {
+      margin: 0 10px;
+    }
+  }
+  

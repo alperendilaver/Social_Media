@@ -1,0 +1,7 @@
+@model GroupMemberShipRequests
+
+  <form asp-action="Create" asp-controller="GroupMemberShipRequest" method="post" enctype="multipart/form-data" style="width: 100%;">
+    <input type="hidden" asp-for="GroupId">
+    <input type="hidden" asp-for="UserId">
+    <button type="submit" class="btn btn-outline-dark mt-3 ">Gruba Katılma İsteği Gönder</button>
+  </form>

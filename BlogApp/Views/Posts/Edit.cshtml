@@ -1,0 +1,58 @@
+@model PostEditViewModel
+
+<div class="container profile-container">
+    <div class="card-columns">
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                    <button class="btn btn-primary " id="changeImage" style="width: 100%;">Fotoğraf Değiştir</button>
+                </div>
+                
+                <form action="Edit" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-field col-lg-12 uploadImage mb-3 mt-3" style="display: none; ">
+                        <input type="file" asp-for="imageFile" class="form-control">
+                       </div>
+                      
+                    @if(Model.image!=null){  
+                    <img class="card-img-top"
+                        src="/img/@Model.image"
+                        alt="Card image cap">
+                    }
+                    <div class="mt-3"><input type="checkbox" class="form-check-input" asp-for="deletePhoto"> <label asp-for="deletePhoto">Fotoğrafı Kaldır</label></div>
+                    <input value="@Model.Context
+                    " class="form-control mt-3" asp-for="Context">
+                    <input type="hidden" value="@Model.PostId" asp-for="PostId">
+
+                    <input type="hidden" asp-for="GroupId" value="@Model.GroupId">
+                    <div class="row mt-3">
+                    
+                            <button type="submit" class="btn submit-btn  btn-success mt-3" >Kaydet</button>
+                        <div class="col text-right">
+                           
+                           
+                        </div>    
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <div class="deleteForm mt-4">
+            <form asp-action="Delete" method="post" onsubmit="return confirm('Emin Misiniz')" style="display: inline-block; width: 100%;">
+            <input type="hidden"  asp-for="PostId" value="@Model.PostId">
+            <button type="submit" class="btn btn-outline-danger" style="width: 100%;">Delete Post</button>
+        </form>
+        </div>
+
+      </div>
+  </div>
+@section Scripts{
+    <script >
+    $(document).ready(function() {
+
+            $('#changeImage').click(function() {
+                $('.uploadImage').show(500);
+            });
+        });
+        </script>
+    }

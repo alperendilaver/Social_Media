@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Social</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BlogApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/mycss/userCreate.css">
+
+    <link rel="stylesheet" href="~/mycss/userProfile.css">
+
+    <link rel="stylesheet" href="~/mycss/postCreate.css">
+    
+    <link rel="stylesheet" href="~/mycss/reaction.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Social</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Posts" asp-action="CreatePost">Gönderi Oluştur</a>
+                                                    
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Group" asp-action="">Gruplar</a>
+                                                    
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Group" asp-action="Create">Grup Oluştur</a>
+    
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item mr-auto">
+                            <a asp-action="Profile" asp-controller="Users" class="nav-link text-light">
+                                @{var userName=User.FindFirstValue(ClaimTypes.Name);
+                                    @userName
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item mr-auto">
+                            @{if(User.Identity.IsAuthenticated){
+                                <a asp-action="Logout" asp-controller="Users" class="text-danger nav-link">Çıkış Yap</a>
+                            }}
+                        </li>
+                        <li class="nav-item mr-auto">
+                            @{if(!User.Identity.IsAuthenticated){
+                                <a asp-action="Login" asp-controller="Users" class="text-light nav-link"> Giriş Yap</a>
+                                <a asp-action="Create" asp-controller="Users" class="text-light nav-link"> Kayıt Ol</a>
+                                
+                            }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+   </body>
+</html>

@@ -1,0 +1,54 @@
+@model PostCreateViewModel
+@{
+
+}
+<section class="get-in-touch" >
+   <h1 class="title" >Gönderi Oluştur</h1>
+   <form class="contact-form" action="CreatePost" method="post" enctype="multipart/form-data">
+        <div class="form-field col-lg-12">
+         <textarea asp-for="Context" class="input-text js-input" type="text" placeholder="Metin Giriniz" required></textarea>
+        </div>
+        <div class="form-field col-lg-12">
+         <label asp-for="imageFile">Görsel Ekle</label>
+         <input type="file" asp-for="imageFile" class="form-control mt-2">
+        </div>
+      
+        
+
+        <!--gruptan yönlendirme gelmezse-->
+        @if(ViewBag.isGroupPost!=true){
+         <button type="button" class="btn btn-outline-dark" id="showGroupSelect">Gruba Ait Post Paylaşmak istiyorum</button>
+         <button type="button" class="btn btn-outline-danger" id="hideGroupSelect">Grup Postu Paylaşmak İstemiyorum</button>
+           <div class="form-field groupSelectList">
+              <label for="GroupId">Üye Olduğun Gruplar</label>
+              <select class="form-control" name="GroupId" asp-items="@ViewBag.UserGroups">
+               <option value="null"></option>
+            </select>
+         </div>
+      }else{
+         <input type="hidden" asp-for="GroupId" value="@ViewBag.groupId">
+      }
+        
+        <div class="form-field col-lg-12">
+         <button type="submit" class="submit-btn btn btn-dark">Kaydet</button> 
+      </div>
+   </form>
+</section>
+
+@section Scripts{
+   <script>
+      $(document).ready(function() {
+         $("#showGroupSelect").click(function(){
+            $(".groupSelectList").show(500)
+            $("#showGroupSelect").hide();
+            $("#hideGroupSelect").show();
+         })
+         $("#hideGroupSelect").click(function(){
+            $("#showGroupSelect").show();
+            $("#hideGroupSelect").hide();
+            $(".groupSelectList").hide(500)
+         })
+      })
+   </script>
+}
+    

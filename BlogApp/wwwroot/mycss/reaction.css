@@ -1,0 +1,7 @@
+.reactions li{
+    display: inline-block;
+}
+.reactions ul{
+    list-style-type: none;
+    margin-right: 5px;
+}

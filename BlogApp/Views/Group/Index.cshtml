@@ -1,0 +1,92 @@
+@model List<Group>
+@{
+  var jndgroups= new List<Group>();
+  jndgroups=@ViewBag.joinedGroups;
+}
+@{
+  var requests = new List<GroupMemberShipRequests>();
+    requests=@ViewBag.requests;
+  
+}
+  <div class="d-flex flex-column">
+    @foreach (var item in Model)
+    {
+      
+      <div class="card-columns d-flex justify-content-center">
+        <div class="card mt-5" style="width: 600px;">
+      
+          <a asp-action="Detail" asp-controller="Group" asp-route-id="@item.GroupId">
+            
+            <div class="card-body">
+              <h6 class="fs-3 ">@item.GroupName</h6>
+              <hr>   
+              
+              @if(@ViewBag.CurrentUser==@item.userId){
+                <p class=" fw-lighter font-monospace text-dark">Admini olduğun grubuna Git</p>  
+              }
+              @if (item.image != null)
+              {
+                <img src="/img/@item.image" alt="" class="img-fluid">
+              }
+                
+              
+            </div>
+          </a>
+          @if(!jndgroups.Any(x=>x.GroupId == item.GroupId)){
+
+            var currReq = requests.Find(x=>x.GroupId==@item.GroupId && x.UserId==@ViewBag.CurrentUser);
+            @if(currReq==null)
+            {
+              @Html.Partial("_GroupMembershipRequestForm", new GroupMemberShipRequests { GroupId = @item.GroupId, UserId = @ViewBag.CurrentUser }) 
+            }
+            else {
+              <p class="btn btn-dark text-light ">İstek Gönderildi Admin Onayı Bekleniyor</p>
+            }
+            <!-- <button type="button" id="sendRequest" class="sendRequest btn btn-outline-info mt-3" data-group-id="@item.GroupId">Katılma İsteği Gönder</button> -->
+          }
+          
+            
+           
+          
+        </div>
+      </div>
+    }
+  </div>
+@section Scripts{
+  <script>
+     $(document).ready(function() {
+      $("#sendRequest").click(function(){
+        
+        // Form verilerini al
+        var groupId = this.getAttribute('data-group-id');
+        var formData = {
+            GroupId: groupId,
+            UserId: ViewBag.CurrentUser
+        };
+
+        // Fetch API kullanarak POST isteği yap
+        fetch('/api/GroupMemberShipRequest/Create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // İşlemleriniz burada devam eder...
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+      });
+
+     });
+  </script>
+}

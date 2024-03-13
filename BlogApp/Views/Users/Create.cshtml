@@ -1,0 +1,61 @@
+@model UserCreateViewModel
+
+<div class="row">
+    <div class="col-12">
+<form action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+          <label class="sr-only fw-light" asp-for="Name">Ad</label>
+          <input type="text" class="form-control mt-2 form-control-lg" asp-for="Name" placeholder="Adınızı Giriniz">
+    
+    </div>
+    
+    
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+            <label class="sr-only fw-light" asp-for="SurName">Soyad</label>
+            <input type="text" class="form-control mt-2 form-control-lg" asp-for="SurName"id="inlineFormInput" placeholder="Soyadınızı Giriniz">
+            
+    </div>
+        
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto ">
+            <label class="sr-only fw-light" asp-for="UserName">Kullanıcı Adı</label>
+            <input type="text" class="form-control mt-2 form-control-lg" asp-for="UserName" placeholder="Kullanıcı Adı Oluşturunuz">
+    </div>
+        
+        <div class="form-row align-items-center mt-3">
+            <div class="col-auto">
+          <label class="sr-only fw-light" asp-for="Email">Email</label>
+          <input asp-for="Email" class="form-control mt-2 form-control-lg" id="inlineFormInput" placeholder="Mail Adresinizi Giriniz">
+    
+    </div>
+
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+          <label class="sr-only fw-light" asp-for="Phone">Telefon Numarası</label>
+          <input asp-for="Phone" class="form-control form-control-lg mt-2" id="inlineFormInput" placeholder="Telefon">
+    </div>
+
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+          <label class="sr-only fw-light" asp-for="Password">Parola</label>
+          <input type="password" asp-for="Password" class="form-control form-control-lg mt-2" id="inlineFormInput" placeholder="Parola">
+    </div>
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+          <label class="sr-only fw-light" asp-for="ComparePassword">Parola Tekrarı</label>
+          <input type="password" asp-for="ComparePassword" class="form-control form-control-lg mt-2" id="inlineFormInput" placeholder="Parolayı Tekrar Giriniz">
+    </div>
+
+
+   
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark mt-3 ">Kayıt Ol</button>
+    </div>
+</form>
+</div>
+</div>

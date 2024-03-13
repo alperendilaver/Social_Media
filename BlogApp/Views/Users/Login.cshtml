@@ -1,0 +1,17 @@
+@model UserLoginViewModel
+
+<form action="Login" method="post">
+    <div class="form-group ">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label asp-for="Email">Email</label>
+        <input class="form-control mt-2 form-control-lg" asp-for="Email" placeholder="Mail Adresinizi Giriniz">
+        <small id="emailHelp" class="form-text text-muted">Bilgilerinizi kimse ile paylaşmayacağız</small>
+    </div>
+    <div class="form-group mt-3">
+        <label asp-for="Password">Parola</label>
+        <input type="password" class="form-control form-control-lg mt-2" asp-for = "Password" placeholder="Parola">
+    </div>
+
+    <button type="submit" class="btn btn-dark mt-3">Giriş Yap</button>
+</form>
+    

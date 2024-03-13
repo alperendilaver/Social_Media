@@ -1,0 +1,29 @@
+@model CreateGroupViewModel
+
+<div class="row">
+    <div class="col-12">
+        <h1>Create Group</h1>
+        <div class="bg-white p-4">
+            <form asp-action="Create" asp-controller="Group"  method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                
+                <div class="mb-3">
+                    <label asp-for="name" class="form-label">Grup Adını Giriniz</label>
+                    <input asp-for="name" class="form-control">
+                </div>    
+
+                <div class="mb-3">
+                    <label asp-for="groupPhoto" class="form-label">Grup Fotoğrafı Giriniz</label>
+                    
+                    <input type="file" 
+                    name="groupPhoto" id="groupPhoto"
+                    class="form-control">    
+                </div>
+            
+            
+            
+                <button type="submit" class="btn btn-dark">Oluştur</button>
+        </form>
+    </div>
+    </div>
+</div>

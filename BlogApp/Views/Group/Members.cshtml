@@ -1,0 +1,32 @@
+@model List<GroupMembers>
+
+    <div class="d-flex flex-column">
+        @foreach (var item in Model)
+        {
+          <div class="card-columns d-flex justify-content-center">
+            <div class="card mt-5" style="width: 600px;">
+              <a >
+                @if(ViewBag.admin==item.user.Id){
+                    <p class="text-success">Admin</p>
+                }else{
+
+                    <form asp-action="RemoveMember" method="post" onsubmit="return confirm('Emin Misiniz')" style="display: inline-block;">
+                        <input type="hidden"  name="grupId" value="@item.group.GroupId">
+                        <input type="hidden"  name="id" value="@item.user.Id">
+                        <input type="hidden" name="grupName" value="@item.group.GroupName">
+                        <button type="submit" class="btn btn-danger btn-sm">Gruptan Çıkar</button>
+                    </form>
+
+                    <p class="text-info">üye</p>
+                }
+                <h6>@item.user.UserName</h6>
+                <div class="card-body">
+                  <p class="card-text">
+                   
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        }
+      </div>
