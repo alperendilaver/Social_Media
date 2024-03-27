@@ -1,0 +1,11 @@
+body{font-family: "Roboto Mono", monospace;
+}
+::placeholder {
+    color: #999 !important;
+    font-size: large;    
+}
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }

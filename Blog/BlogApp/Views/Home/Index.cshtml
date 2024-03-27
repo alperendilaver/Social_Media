@@ -1,0 +1,34 @@
+﻿@model PostIndexViewModel
+@{
+ViewData["Title"] = "Home Page";
+
+}
+
+
+<div class="d-flex flex-column ">
+  @foreach(var item in Model.posts){
+    if(item.GroupId==null){
+      <div class="card-columns d-flex justify-content-center" style="margin-bottom: 90px;">
+
+        <div class="card mt-5" style="width: 600px;">
+          <a asp-action="Detail" asp-controller="Posts" asp-route-id="@item.PostId">
+            <h6>@item.user.UserName</h6>
+            @if(item.image!=null){
+              var filename=item.image;
+              
+              <img class="card-img-top " src="/img/@filename" alt="Card image cap">
+            }
+            
+            <div class="card-body">
+              <p class="card-text">
+                @item.Context
+              </p>
+              <p class="card-text"><small class="text-muted">@item.Published.ToString("dd.MM.yyyy HH:mm")</small></p>
+            </div>
+            </a>
+            
+          </div>
+          </div>
+        }
+        }
+</div>
