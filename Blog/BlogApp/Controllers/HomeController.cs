@@ -19,9 +19,9 @@ public class HomeController : Controller
         _userManager = userManager;
         _commentRepository = commentRepository;
     }
-    public IActionResult Index()
+    public  IActionResult Index()
     {
-        var user= _userManager.Users.ToList();
+        var user= _userManager.Users.ToList() ?? new List<AppUser>();
         var post=_postRepository.posts.Include(x=>x.user).ToList();
         var comment=_commentRepository.comments.Include(x=>x.user).Include(x=>x.post).ToList();
         return View(new PostIndexViewModel{

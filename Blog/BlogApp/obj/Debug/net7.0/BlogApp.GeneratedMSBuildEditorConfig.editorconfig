@@ -78,8 +78,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ29uZmlybUVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/Login.cshtml]
@@ -88,6 +96,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/Users/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVzZXRQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Alperen/Desktop/dotnetmyprojects/Blog/BlogApp/Views/_ViewImports.cshtml]

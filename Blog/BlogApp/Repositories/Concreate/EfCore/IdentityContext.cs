@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BlogApp.Repositories.Concreate.EfCore
 {
     public class IdentityContext:IdentityDbContext<AppUser,IdentityRole,string>{
-        public IdentityContext(DbContextOptions<IdentityContext> options):base(options)
+        public IdentityContext  (DbContextOptions<IdentityContext> options):base(options)
         {
             
         }

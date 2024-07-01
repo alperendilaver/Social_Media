@@ -18,36 +18,38 @@ namespace BlogApp.Repositories.Concreate.EfCore
             return await _context.Posts.Where(x => x.UserId == userName).ToListAsync();
 
         }
-        public void CreatePost(Post post)
+        public async Task<int> CreatePost(Post post)
         {
-            post.user=null;
             _context.Add(post);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
             
         }
-        public void EditPost(PostEditViewModel model){
+        public async Task<int> EditPost(PostEditViewModel model){
             var post = posts.FirstOrDefault(x=>x.PostId==model.PostId);
+            if(post==null)
+                return 0;
             post.Context = model.Context;
             post.image = model.image;
             post.Published = DateTime.Now;
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
-        public void DeletePost(PostEditViewModel model){
+        public async Task<int> DeletePost(PostEditViewModel model){
             var post=_context.Posts.FirstOrDefault(x=>x.PostId==model.PostId);
             if(post!=null){
                 _context.Remove(post);
-                _context.SaveChanges();
                 if(post.image!=null){
                 var imagePath=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img",post.image);
                 if(File.Exists(imagePath))
                     File.Delete(imagePath);
                 }
 
+                return await _context.SaveChangesAsync();
             }
+            return 0;
         }
-        public void DeleteComment(Comment comment){
+        public async Task<int> DeleteComment(Comment comment){
             _context.comments.Remove(comment);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
         public async Task AddReaction(string userId,int postId, int reactionId){
@@ -80,6 +82,27 @@ namespace BlogApp.Repositories.Concreate.EfCore
         public async Task RemoveReaction(Reaction reaction){
             _context.Remove(reaction);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Reaction>> GetReactions(int postId)
+        {
+            return await  _context.reactions.Where(x=>x.PostId==postId).ToListAsync();
+        }
+
+        public async Task<Reaction> GetReaction(string userId,int postId)
+        {
+            return await _context.reactions.Where(x=>x.UserId==userId && x.PostId==postId).FirstOrDefaultAsync()??new Reaction{
+                PostId=0,
+                UserId=""
+            };
+        }
+
+        public async Task<Post> GetPost(int postId)
+        {
+            return  await _context.Posts.Where(x=>x.PostId==postId).Include(x=>x.user).FirstOrDefaultAsync() ?? new Post{
+                user = new AppUser(),
+                image = null
+            };
         }
     }
 }

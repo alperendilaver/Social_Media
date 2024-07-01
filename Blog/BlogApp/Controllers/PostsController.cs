@@ -14,39 +14,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BlogApp.Controllers
 {
     public class PostsController:Controller{
-        private readonly BlogContext _blogContext;
-         private UserManager<AppUser> _userManager;
-               
+        private UserManager<AppUser> _userManager;
+        private IGroupService _groupService;
         private IPostRepository _postRepository;
         private ICommentRepository _commentRepository;
-        public PostsController(BlogContext blogContext,IPostRepository postRepository,UserManager<AppUser> userManager,ICommentRepository commentRepository)
+        public PostsController(IPostRepository postRepository,UserManager<AppUser> userManager,ICommentRepository commentRepository,IGroupService groupService)
         {
-            _blogContext=blogContext;
+            _groupService=groupService;
             _postRepository=postRepository;
             _userManager = userManager;
             _commentRepository=commentRepository;
         }
           
 
-      
-        public IActionResult CreatePost(string? id,bool? isGrupPost,int? grpId ){
+        [Authorize]
+        public async Task<IActionResult> CreatePost(string? id,bool? isGrupPost,int? grpId ){
             //yönlendirme gruptan geldiyse grup seçtirme
-            if(!User.Identity.IsAuthenticated){
+            if(!User.Identity.IsAuthenticated)          {
                 return RedirectToAction("Login","Users");
             }     
             var user= _userManager.Users.FirstOrDefault(u=>u.Id==User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var groups=_blogContext.Groups;
-            foreach (var item in _blogContext.groupMembers)
-            {
-                if(item.userId==user.Id){
-                    var group=groups.Find(item.groupId);
-                    user.UserGroups.Add(group);
-                }
-            }
+            var groups=await _groupService.GetGroupsforUser(id??"");
+            
             ViewBag.isGroupPost= isGrupPost;
             if(id!=null)
                 ViewBag.groupId=grpId;
-            ViewBag.UserGroups = new SelectList(user.UserGroups.ToList(),"GroupId","GroupName");
+
+            ViewBag.UserGroups = new SelectList(groups,"GroupId","GroupName");
             return View();
         }
         [HttpPost]
@@ -73,11 +67,17 @@ namespace BlogApp.Controllers
                     image = model.image,
                     GroupId=model.GroupId
                     };
-                _postRepository.CreatePost(post);
+                var result = await _postRepository.CreatePost(post);
+                if(result>0){
                 if(post.GroupId!=null)
                     return  RedirectToAction("Detail","Group",new {id=post.GroupId});
                 else
                     return RedirectToAction("Index","Home");
+                }
+                else{
+                    ModelState.AddModelError("","Post Oluşturulamadı");
+                    return View(model);
+                }
                 }
                 
             }
@@ -90,8 +90,9 @@ namespace BlogApp.Controllers
                 var userId=post.UserId;
                 var user = await _userManager.FindByIdAsync(userId??"");
                 if(user!=null){
-                var comment=_commentRepository.comments.Include(x=>x.user).Include(x=>x.post).ToList();
-                var reactions = _blogContext.reactions.Where(x=>x.PostId==id).ToList();
+                var comment=await _commentRepository.GetPostComments(id);
+                var reactions =await _postRepository.GetReactions(id);
+                
                 ViewBag.likeCount = reactions.Where(x=>x.reaction==Reactions.like).Count();
                 
                 ViewBag.unlikeCount = reactions.Where(x=>x.reaction==Reactions.unlike).Count();
@@ -100,9 +101,8 @@ namespace BlogApp.Controllers
                 
                 ViewBag.congrCount = reactions.Where(x=>x.reaction==Reactions.congr).Count();
 
-               var currUserId= User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var userReaction = _blogContext.reactions.Where(x=>x.UserId==currUserId && x.PostId==post.PostId).FirstOrDefault();
-
+               var currUserId= User.FindFirstValue(ClaimTypes.NameIdentifier)??"";
+                var userReaction =await  _postRepository.GetReaction(currUserId,id);
                 var viewModel = new PostDetailViewModel{
                     userId=userId,
                     user = user,
@@ -120,9 +120,7 @@ namespace BlogApp.Controllers
         }
         [Authorize]
         public async Task< IActionResult> Edit(PostEditViewModel model,int id){
-            var post = await _postRepository.posts.Include(x=>x.user).
-            FirstOrDefaultAsync(x=>x.PostId == id);
-            var claimuser=User.FindFirstValue(ClaimTypes.Name);
+            var post = await _postRepository.GetPost(id); var claimuser=User.FindFirstValue(ClaimTypes.Name);
             if(post.user.UserName!=claimuser){
                 return RedirectToAction("Index","Home");
             }
@@ -147,7 +145,7 @@ namespace BlogApp.Controllers
         [HttpPost]
         public async Task< IActionResult> Edit(PostEditViewModel model){
             if(model!=null && _postRepository.posts.Any(x=>x.PostId==model.PostId)){
-                    var oldPost= await _postRepository.posts.FirstOrDefaultAsync(x=>x.PostId==model.PostId); 
+                    var oldPost= await _postRepository.GetPost(model.PostId);
                     if(oldPost!=null){
                       if(model.imageFile!=null && model.deletePhoto==false){
                         if(oldPost.image!=null && oldPost.image !=model.image){
@@ -170,7 +168,7 @@ namespace BlogApp.Controllers
                         }
                         else if(model.deletePhoto==true &&model.imageFile==null){//foto kaldırma
                             model.image=null;
-                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", oldPost.image);
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", oldPost.image??"");
                             if (System.IO.File.Exists(oldImagePath))
                             {
                                 System.IO.File.Delete(oldImagePath);
@@ -183,19 +181,31 @@ namespace BlogApp.Controllers
                         return View(model);
                         }
                     }
-                    _postRepository.EditPost(model);
-                    if(model.GroupId!=null)
-                        return RedirectToAction("Detail","Group",new{id=model.GroupId});
-                    return RedirectToAction("Profile","Users");
+                    var result=await _postRepository.EditPost(model);
+                    if(result>0){
+                        if(model.GroupId!=null)
+                            return RedirectToAction("Detail","Group",new{id=model.GroupId});
+                        return RedirectToAction("Profile","Users");
+                    }
+                    else{
+                        ModelState.AddModelError("","Düzenleme Başarısız");
+                        return View(model);
+                    }
                 }
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(PostEditViewModel model){
-            _postRepository.DeletePost(model);
-            if(model.GroupId!=null)
-                return RedirectToAction("Detail","Group",new {id = model.GroupId});
-            return RedirectToAction("Index","Home");
+        public async Task<IActionResult> Delete(PostEditViewModel model){
+            var result= await _postRepository.DeletePost(model);
+            if (result>0){
+                if(model.GroupId!=null)
+                    return RedirectToAction("Detail","Group",new {id = model.GroupId});
+                return RedirectToAction("Index","Home");
+            }
+            else{
+                ModelState.AddModelError("","Silme Başarısız");
+                return View(model);
+            }
         }
         [HttpPost]
         public JsonResult AddComment(int postId,string userId,string text){
@@ -221,9 +231,9 @@ namespace BlogApp.Controllers
                 return RedirectToAction("Index","Home"); 
             }
             [HttpPost]
-            public async Task< JsonResult> RemoveReaction(string UserId,int? postId){
-                if(UserId !=null && postId !=null){
-                    var reaction = _blogContext.reactions.Where(x=>x.PostId==postId & x.UserId == UserId).FirstOrDefault();
+            public async Task< JsonResult> RemoveReaction(string UserId,int postId){
+                if(UserId !=null){
+                    var reaction = await _postRepository.GetReaction(UserId,postId); 
                     await _postRepository.RemoveReaction(reaction);
 
                 }
@@ -231,11 +241,16 @@ namespace BlogApp.Controllers
 
             }
             [HttpPost]
-            public IActionResult RemoveComment(int id){
-                var comm =_blogContext.comments.Find(id);
+            public async Task<IActionResult> RemoveComment(int id){
+                var comm = await _commentRepository.GetComment(id);
                 if(comm!=null){
-                    _postRepository.DeleteComment(comm);
-                    return RedirectToAction("Detail","Posts", new {id = comm.postId});
+                    var result =await _postRepository.DeleteComment(comm);
+                    if(result>0){
+                        return RedirectToAction("Detail","Posts", new {id = comm.postId});
+                    }
+                    else{
+                        return NotFound();
+                    }
                 }
                 else return NoContent();
             }

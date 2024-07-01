@@ -6,11 +6,15 @@ namespace BlogApp.Repositories.Abstract
     public interface IPostRepository{
         Task<IEnumerable<Post>> GetPostsByUserIdAsync(string userId);
         IQueryable<Post> posts {get;}
-        void CreatePost(Post post);
-        void EditPost(PostEditViewModel post);
-        void DeletePost(PostEditViewModel model);
+        Task<int> CreatePost(Post post);
+        Task<int> EditPost(PostEditViewModel post);
+        Task<int> DeletePost(PostEditViewModel model);
 
-        void DeleteComment(Comment comment);
+        Task<int> DeleteComment(Comment comment);
+        Task<Post> GetPost(int postId);
+        Task<List<Reaction>> GetReactions(int postId);
+        
+        Task<Reaction> GetReaction(string userId,int postId);
         Task AddReaction(string userId,int postId,int reactionId);
         Task RemoveReaction(Reaction reaction);
     }

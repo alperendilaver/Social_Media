@@ -13,38 +13,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\1c147a72-ba23-4d7f-bc98-6bf0b1949009.jpg",
-      "PackagePath": "staticwebassets\\img\\1c147a72-ba23-4d7f-bc98-6bf0b1949009.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\1c2ebfc3-ae37-4e1c-80d2-484a3506e6f2.jpeg",
-      "PackagePath": "staticwebassets\\img\\1c2ebfc3-ae37-4e1c-80d2-484a3506e6f2.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\6725143b-1807-4a31-92f3-bce7fc6838aa.jpg",
-      "PackagePath": "staticwebassets\\img\\6725143b-1807-4a31-92f3-bce7fc6838aa.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\7d53f4fa-4c0a-44e7-8d57-488d531a0caa.jpg",
-      "PackagePath": "staticwebassets\\img\\7d53f4fa-4c0a-44e7-8d57-488d531a0caa.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\9a184917-a4ec-43f5-a5bf-2689b3ed2c5a.jpg",
-      "PackagePath": "staticwebassets\\img\\9a184917-a4ec-43f5-a5bf-2689b3ed2c5a.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\b49fe178-ab4a-4a60-89d2-c7da8062db96.jpg",
-      "PackagePath": "staticwebassets\\img\\b49fe178-ab4a-4a60-89d2-c7da8062db96.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\f8e4ffdc-8d86-4cde-8070-8494160d0be0.jpg",
-      "PackagePath": "staticwebassets\\img\\f8e4ffdc-8d86-4cde-8070-8494160d0be0.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\img\\fb559500-fc04-4cfc-b2a0-8c19bcf5bba6.jpg",
-      "PackagePath": "staticwebassets\\img\\fb559500-fc04-4cfc-b2a0-8c19bcf5bba6.jpg"
-    },
-    {
       "Id": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

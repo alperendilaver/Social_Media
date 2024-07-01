@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fWKzWqazcOx+XDPVXyg2BZskFQwTJUyQsyh3SWDWoCbVm3NzW5RxPNsImijxlx3Rwef3x4mWdkL5xXCmJgZTUw==",
+  "dgSpecHash": "rxGRjvhAhx0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Alperen\\Desktop\\dotnetmyprojects\\Blog\\BlogApp\\BlogApp.csproj",
   "expectedPackageFiles": [
@@ -40,11 +40,7 @@
     "C:\\Users\\Alperen\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Alperen\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\Alperen\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Alperen\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
-    "C:\\Users\\Alperen\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.15\\microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
-    "C:\\Users\\Alperen\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.15\\microsoft.windowsdesktop.app.ref.7.0.15.nupkg.sha512",
-    "C:\\Users\\Alperen\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.15\\microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512",
-    "C:\\Users\\Alperen\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.15\\microsoft.netcore.app.host.win-x64.7.0.15.nupkg.sha512"
+    "C:\\Users\\Alperen\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

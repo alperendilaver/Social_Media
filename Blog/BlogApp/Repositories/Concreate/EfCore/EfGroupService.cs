@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BlogApp.Controllers;
 using BlogApp.Data;
 using BlogApp.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Repositories.Concreate.EfCore
 {
@@ -35,6 +36,21 @@ namespace BlogApp.Repositories.Concreate.EfCore
             throw new NotImplementedException();
         }
 
+        public async Task<List<Data.Group>> GetGroups()
+        {
+            return await _blogContext.Groups.ToListAsync();
+        }
+
+        public async Task<List<Data.Group>> GetGroupsforUser(string userId)
+        {
+            var query = await _blogContext.groupMembers.Where(x => x.userId == userId).Select(x=>x.group).ToListAsync();
+            return query;
+        }
+
+        public async Task<List<GroupMembers>> GetMembers()
+        {
+            return await _blogContext.groupMembers.ToListAsync();
+        }
 
         public Task<bool> IsMember(int userId, int groupId)
         {

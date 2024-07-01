@@ -60,7 +60,6 @@ C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\staticwe
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\scopedcss\bundle\BlogApp.styles.css
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\scopedcss\projectbundle\BlogApp.bundle.scp.css
-C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\BlogApp.csproj.CopyComplete
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\BlogApp.dll
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\refint\BlogApp.dll
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\BlogApp.pdb
@@ -76,3 +75,4 @@ C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\bin\Debug\net7.0\Microsof
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\bin\Debug\net7.0\MySqlConnector.dll
 C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Alperen\Desktop\dotnetmyprojects\Blog\BlogApp\obj\Debug\net7.0\BlogApp.csproj.Up2Date

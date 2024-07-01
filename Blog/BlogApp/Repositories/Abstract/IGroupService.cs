@@ -16,5 +16,11 @@ namespace BlogApp.Repositories.Abstract
         Task<List<GroupMemberShipRequests>> GetMembershipRequests(int groupId);
         Task ApproveMembershipRequest(int requestId);
         Task RejectMembershipRequest(int requestId);
+
+        Task<List<BlogApp.Data.Group>> GetGroups();
+        Task<List<GroupMembers>> GetMembers();
+
+        Task<List<Data.Group>> GetGroupsforUser(string userId);
+        
     }
 }
