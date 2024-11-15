@@ -1,45 +1,17 @@
-.NET çatısı altında geliştirilen bu sosyal medya projesi, kullanıcıların etkileşimde bulunabileceği dinamik bir platform sunuyor. 
-Projemiz, kullanıcıların kolayca kayıt olabileceği, gönderiler oluşturabileceği, gruplar oluşturabileceği ve yönetebileceği, ayrıca birbirleriyle etkileşimde bulunabileceği bir ortam sağlamaktadır.
+Our social media platform provides a dynamic environment where users can interact with each other. The project was developed using the .NET framework, offering users the ability to register easily, create posts, form and manage groups, and engage with one another in a comprehensive platform.
 
-Gönderi Özellikleri:
+User Features: Users are required to verify their accounts through a link sent to their email addresses during registration; otherwise, they cannot log in. If users forget their passwords, they can reset them via a link sent to their registered email address.
 
-Kullanıcılar, metin ve görsellerle zenginleştirdikleri gönderiler oluşturabilirler. 
-Ayrıca, üye oldukları gruplara özel gönderiler de paylaşabilirler.
-Oluşturdukları gönderileri düzenleyebilir, silme yetkisine sahiptirler. 
-Diğer kullanıcıların gönderilerine yorum yapabilir, istedikleri zaman yorumlarını silebilirler.
-Gönderilere beğeni, beğenmeme, sinirlenme, tebrik etme gibi ifadeler bırakabilirler.
+Post Features: Users encounter a rich editor interface when creating posts, allowing them to enhance their posts with text and images. Additionally, users can share posts specifically within groups they are members of, if applicable. Created posts can be edited or deleted at any time by the users. Besides commenting on other users' posts, users also have the authority to delete their comments. Posts can receive one of four reactions: like, dislike, angry, or congratulate. Users can also remove their reactions or change them to another at any time.
 
-Grup Özellikleri:
-
-Kullanıcılar, kendi ilgi alanlarına göre gruplar oluşturabilirler. 
-Gruplar, belirlenen ad ve görselle birlikte oluşturulur ve bu gruplara sadece üye olanlar erişebilir. 
-Grup yöneticileri, grup içeriğini düzenleme yetkisine sahiptirler. 
-Üyelik isteği göndermeyen kullanıcılar, grup detaylarında bulunan "üyelik isteği gönder" butonu ile gruplara üyelik isteğinde bulunabilirler. 
-Grup yöneticileri, gelen üyelik isteklerini görüntüleyebilir ve uygun gördükleri istekleri kabul edebilirler.
-Ayrıca grup yöneticileri, gruba ait gönderileri silebilirler ve gerektiğinde gruba ait tüm içerikleri kaldırabilirler.
-
-Bu proje, kullanıcıların sosyal çevrelerini genişletmelerine, ilgi alanlarına göre gruplar oluşturmalarına ve birbirleriyle etkileşimde bulunmalarına olanak tanıyan kapsamlı bir platform sunmaktadır. 
-Saygılarımla
+Group Features: Users can create groups based on their interests. Groups are created with a specified name and image, and the creator is automatically assigned the role of group admin. Groups and their content are only accessible to members. Group admins have the authority to manage group content, such as editing group details based on member requests. Non-members can request group membership through a "send membership request" button available on the group details page. Group admins can view and approve or reject incoming membership requests. Additionally, group admins have the right to delete posts within the group and remove members from the group.
 
 --------------------------------------
-This social media project developed under the .NET framework offers users a dynamic platform where they can interact. 
-Our project provides an environment where users can easily register, create posts, create and manage groups, as well as interact with each other.
+Sosyal medya platformumuz, kullanıcıların etkileşimde bulunabileceği dinamik bir ortam sunmaktadır. Proje, .NET çatısı altında geliştirilmiş olup, kullanıcıların kolayca kayıt olabileceği, gönderiler oluşturabileceği, gruplar oluşturabileceği ve yönetebileceği, ayrıca birbirleriyle etkileşimde bulunabileceği kapsamlı bir platformdur. 
 
-Post Features:
+Kullanıcı Özellikleri: Kullanıcının, sisteme kaydolduğunda mail adresine gelen bağlantı yardımı ile hesabını onaylaması gerekmektedir aksi takdirde uygulamaya giriş yapamaz. Kullanıcı parolasını unutması durumunda mail adresine gelen bağlantı yardımı ile parolasını güncelleyebilir.
 
-Users can create posts enriched with text and images.
-They can also share posts specifically to groups they are members of.
-Users can edit and delete their created posts.
-They can comment on other users' posts and delete their comments at any time.
-Users can leave expressions such as likes, dislikes, angers, congratulations, etc., on posts.
+Gönderi Özellikleri:  Kullanıcılar, gönderi oluştururken metin ve görsellerle zenginleştirebilecekleri bir editör arayüzü ile karşılaşırlar. Gönderi oluştururken ayrıca, varsa üye oldukları gruplara özel gönderiler de paylaşabilirler. Oluşturulan gönderiler, kullanıcılar tarafından istedikleri zaman düzenlenebilir veya silinebilir. Diğer kullanıcıların gönderilerine yorum yapma imkanına ek olarak, yorumları silme yetkisi de kullanıcılara tanınmıştır. Gönderilere beğeni, beğenmeme, sinirlenme, tebrik etme gibi dört farklı ifade bırakılabilir. Ayrıca, kullanıcılar bu ifadeleri istedikleri zaman geri alabilirler veya farklı bir ifadeyle değiştirebilirler.
 
-Group Features:
+Grup Özellikleri:  Kullanıcılar, ilgi alanlarına göre gruplar oluşturabilirler. Gruplar, belirlenen ad ve görselle birlikte oluşturulur ve grup oluşturan kullanıcı otomatik olarak grup yöneticisi (admin) rolüne atanır. Gruplar, sadece üye olan kullanıcılar tarafından görüntülenebilir ve içeriklere erişilebilir. Grup yöneticileri, grup üyelerinin isteğine bağlı olarak grup içeriğini düzenleme yetkisine sahiptirler. Üyelik isteği göndermeyen kullanıcılar, grup detaylarında bulunan "üyelik isteği gönder" butonu ile gruplara üyelik isteğinde bulunabilirler. Grup yöneticileri, gelen üyelik isteklerini görüntüleyebilir ve uygun gördükleri istekleri kabul edebilirler. Ayrıca, grup yöneticileri, gruba ait gönderileri silme ve gruptan üye çıkarma gibi yetkilere sahiptirler.
 
-Users can create groups based on their interests.
-Groups are created with a specified name and image, and only members can access them.
-Group admins have the authority to edit the group's content.
-Users who do not send membership requests can request to join groups using the "send membership request" button in the group details.
-Group admins can view incoming membership requests and accept those they deem appropriate.
-Additionally, group admins can delete group posts and, if necessary, remove all content associated with the group.
-
-This project provides a comprehensive platform for users to expand their social circles, create groups based on their interests, and interact with each other. 
